@@ -1,0 +1,33 @@
+.panel {
+    background-color: #2196F3;
+    padding: 4px;
+    margin-right: 16px;
+}
+
+.panel-item {
+    background-color: skyblue;
+    margin: 8px 2px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.panel-header {
+    @extend .panel-item;
+
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: large;
+}
+
+.panel-body {
+    @extend .panel-item;
+    
+    h4 {
+        margin-top: 8px;
+    }
+}
+
+.controls-flex {
+    display: flex;
+    align-items: flex-end;
+}

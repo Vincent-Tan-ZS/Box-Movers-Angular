@@ -1,0 +1,39 @@
+<div>
+    <div class="container">
+        <div class="grid-count">
+            <span class="steps" >{{_stepCount}} Steps Taken</span>
+        </div>
+        <div class="grid-container" [ngStyle]="{'grid-template-columns': _gridContainer}" tabindex="0" id="grid-container"
+        (keydown.r)="this.Reset()"
+        (keydown.arrowup)="MovePlayer(0, -1)"
+        (keydown.arrowdown)="MovePlayer(0, 1)"
+        (keydown.arrowleft)="MovePlayer(-1, 0)"
+        (keydown.arrowright)="MovePlayer(1, 0)">
+            <ng-container *ngFor="let row of grids; let i = index">
+                <ng-container *ngFor="let col of row; let j = index">
+                    <div *ngIf="IsGridEmpty(col)" class="empty-space">
+                        <div class="player" *ngIf="_playerPos.x == j && _playerPos.y == i"></div>
+                        <div class="goal" *ngIf="IsGoal(i, j)"></div>
+                        <div class="box" *ngIf="IsBox(i, j)"></div>
+                    </div>
+                    <div *ngIf="IsGridWall(col)" class="wall"></div>
+                    <div *ngIf="IsGridNull(col)" class="null-space"></div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<span id="gameovermodal" (click)="OpenModal(content)"></span>
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Level Complete!</h4>
+	</div>
+	<div class="modal-body">
+        <p class="h4">Score: {{_stepCount}}</p>
+        <p class="h6">Do you wish to retry for a better score or move to the next level?</p>
+	</div>
+	<div class="modal-footer">
+        <button class="btn btn-info" (click)="this.Reset()">Retry</button>
+        <button class="btn btn-info" (click)="this.NextLevel()">Next Level</button>
+	</div>
+</ng-template>

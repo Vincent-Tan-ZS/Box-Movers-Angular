@@ -1,0 +1,95 @@
+// Variables
+$grid-size: 80px;
+$grid-border: 1px solid black;
+
+$entity-size: calc($grid-size - 10px);
+
+// Classes
+.container {
+    background-color: #2196F3;
+    padding: 16px;
+}
+
+.grid-container {
+    display: inline-grid;
+}
+
+.grid-item {
+    display: flex;
+    border: $grid-border;
+    width: $grid-size;
+    height: $grid-size;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-count {
+    background-color: lightskyblue;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 8px;
+
+    .steps {
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+}
+
+.entity {
+    width: $entity-size;
+    height: $entity-size;
+}
+
+.entity-img {
+    background-size: cover;
+    background-position: center;
+}
+
+.empty-space {
+    background-color: lightgray;
+    @extend .grid-item;
+}
+
+.wall {
+    background-color: lightslategray;
+    @extend .grid-item;
+}
+
+.null-space {
+    @extend .grid-item;
+    border: 0px;
+}
+
+.player {
+    background-image: url("../../../../public/assets/player.png");
+    @extend .entity-img;
+    @extend .entity;
+}
+
+.box {
+    background-image: url("../../../../public/assets/box.png");
+    @extend .entity-img;
+    @extend .entity;
+}
+
+.goal {
+    background-image: url("../../../../public/assets/flag.png");
+    @extend .entity-img;
+    @extend .entity;
+}
+
+.gameover-btn-group {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.modal-header, .modal-footer {
+    background-color: #2196F3;
+    color: black;
+}
+
+.modal-body {
+    background-color: lightskyblue;
+    color: black;
+}

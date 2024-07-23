@@ -1,0 +1,16 @@
+<div class="flex">
+    <app-instructions></app-instructions>
+
+    <app-level1 *ngIf="GetLevel() === 1"></app-level1>
+    <app-level2 *ngIf="GetLevel() === 2"></app-level2>
+    <app-level3 *ngIf="GetLevel() === 3"></app-level3>
+    <div *ngIf="GetLevel() === 4" class="end">
+        <div class="end-body">
+            <p class="h4">Thank you for playing!</p>
+            <p class="h6">This site was made to learn and practice Angular</p>
+            <p class="h6">The source code can be found on my <a href="https://github.com/Vincent-Tan-ZS/Box-Movers-Angular" target="_blank">GitHub</a></p>
+        </div>
+    </div>
+</div>
+
+<router-outlet />
