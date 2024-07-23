@@ -65,23 +65,36 @@ export class GridComponent {
     this.modalService.dismissAll();
   }
 
-  IsEntityMovable (xPos: number, yPos: number): boolean {
+  IsEntityMovable (posX: number, posY: number): boolean {
     // Check if game is over
     if (this._isGameOver === true) return false;
 
     // Check if outside of grid
-    if (xPos >= this._gridWidth) return false;
-    if (xPos < 0) return false;
-    if (yPos >= this._gridHeight) return false;
-    if (yPos < 0) return false;
+    if (posX >= this._gridWidth) return false;
+    if (posX < 0) return false;
+    if (posY >= this._gridHeight) return false;
+    if (posY < 0) return false;
 
     // Check if hit wall
-    const newPosGrid = this.grids[yPos][xPos];
+    const newPosGrid = this.grids[posY][posX];
     if (newPosGrid == GridType.Wall) return false;
 
     // Check if hit null
     if (newPosGrid == GridType.NULL) return false;
 
+    return true;
+  }
+
+  MoveBox(posX: number, posY: number, moveX: number, moveY: number): boolean {
+    const boxIndex = this._boxPositions.findIndex(box => box.x == posX && box.y == posY);
+    if (boxIndex < 0) return true;
+
+    const newBoxPos = { x: this._boxPositions[boxIndex].x + moveX, y: this._boxPositions[boxIndex].y + moveY };
+    const boxMoved = this.MoveBox(newBoxPos.x, newBoxPos.y, moveX, moveY);
+
+    if (boxMoved !== true) return false;
+    if (this.IsEntityMovable(newBoxPos.x, newBoxPos.y) !== true) return false;
+    this._boxPositions[boxIndex] = newBoxPos;
     return true;
   }
 
@@ -91,14 +104,8 @@ export class GridComponent {
     if (this.IsEntityMovable(newPos.x, newPos.y) !== true) return; 
 
     // Check if push box
-    const boxIndex = this._boxPositions.findIndex(box => box.x == newPos.x && box.y == newPos.y);
-    if (boxIndex >= 0)
-    {
-      const newBoxPos = { x: this._boxPositions[boxIndex].x + x, y: this._boxPositions[boxIndex].y + y };
-      if (this.IsEntityMovable(newBoxPos.x, newBoxPos.y) !== true) return; 
-
-      this._boxPositions[boxIndex] = newBoxPos;
-    }
+    const boxesMoved = this.MoveBox(newPos.x, newPos.y, x, y);
+    if (boxesMoved !== true) return;
 
     this._playerPos = newPos;
     this._stepCount++;
