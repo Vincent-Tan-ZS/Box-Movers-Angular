@@ -1,4 +1,6 @@
-.flex {
+$logo-size: 40px;
+
+.app-flex {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,5 +15,29 @@
         background-color: lightskyblue;
         padding: 8px;
         border-radius: 10px;
+    }
+}
+
+.tech {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 8px;
+
+    .tech-flex {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        color: white;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
+
+        img {
+            height: $logo-size;
+            width: $logo-size;
+        }
     }
 }

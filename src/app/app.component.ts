@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { LevelManager } from './shared/LevelManager';
 import { Level2Component } from "./components/level2/level2.component";
 import { Level3Component } from "./components/level3/level3.component";
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, Level1Component, InstructionsComponent, Level2Component, Level3Component],
+  imports: [RouterOutlet, CommonModule, NgbTooltipModule, Level1Component, InstructionsComponent, Level2Component, Level3Component],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
